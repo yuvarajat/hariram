@@ -1,0 +1,51 @@
+/* Styling to simulate an A4 page */
+.a4-page {
+    width: 210mm;
+    height: 297mm;
+    margin: 20mm auto; /* Center the page */
+    padding: 5mm; /* Add padding to avoid content being cut off */
+    /* border: 1px solid #000; Optional: Add border for visibility */
+    box-sizing: border-box;
+    /* background-color: #fff; */
+  }
+
+  .inputSno, .inputRat, .inputPar, .inputNOM, .inputQty, .inputAmo {
+    height: 50px;
+  }
+
+  .inputSno {
+    width: 35px;
+  }
+
+  .inputRat {
+    width: 80px;
+  }
+
+  .inputPar {
+    width: 400px;
+  }
+
+  .inputNOM {
+    width: 80px;
+  }
+
+  .inputQty {
+    width: 80px;
+  }
+
+  .inputAmo {
+    width: 90px;
+  }
+  
+  /* Optional: You can add styles to ensure printing is A4-sized */
+  @media print {
+    .a4-page {
+      width: 210mm;
+      height: 297mm;
+      margin: 0;
+      /* padding: 0; */
+      border: none;
+      box-sizing: content-box;
+    }
+  }
+  
