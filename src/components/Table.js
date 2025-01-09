@@ -1,14 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from './Table.module.css';
 
-const Table = () => {
-    const [rows, setRows] = useState([
-        {sno: 10, rate: 1.26, particulars: 'Top arm pressure checking', nom: 27.5, qty: 12688, amount: 15986.88},
-        {sno: 20, rate: 3.21, particulars: 'Spindle resetting work', nom: 47, qty: 12688, amount: 40728.48},
-        {sno: 30, rate: 1.45, particulars: 'Bottom apron replacement', nom: 6, qty: 2736, amount: 3967.20},
-        {sno: 40, rate: 5.50, particulars: 'Draw bar roller bearing replacement', nom: 10, qty: 664, amount: 3652.00},
-        {sno: 50, rate: 776.25, particulars: 'Machine Erection / Shifting Work / Manpower', nom: 14, qty: 14, amount: 10867.50},
-    ]);
+const Table = ({billDetails, rows}) => {
 
     const convertToWords = (num) => {
         const ones = [
@@ -75,7 +68,7 @@ const Table = () => {
     return(
         <div>
             <table cellPadding={5} width='100%' style={{border: '1px solid black', borderCollapse: 'collapse' }}>
-                <caption style={{fontWeight: 'bold', textAlign: 'center', marginBottom: '10px', textTransform: 'uppercase'}}>APRIL 2024</caption>
+                <caption style={{fontWeight: 'bold', textAlign: 'center', marginBottom: '10px', textTransform: 'uppercase'}}>{billDetails.extractedMonthYear}</caption>
                 <thead>
                     <tr className={styles.borderStyle}>
                         <th className={styles.borderStyle}>S.No.</th>
@@ -87,7 +80,7 @@ const Table = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {rows.map(row => <tr className={styles.borderStyle} align='center'>
+                    {rows.map((row, index) => <tr className={styles.borderStyle} align='center' key={index}>
                         <td className={styles.borderStyle}>{row.sno}</td>
                         <td className={styles.borderStyle}>{row.rate}</td>
                         <td className={styles.borderStyle}>{row.particulars}</td>
