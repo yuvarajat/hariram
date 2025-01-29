@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'; // Import the CSS file for styling
 
 import CalcPage from './pages/CalcPage';
@@ -20,14 +20,14 @@ function App() {
 //     {sno: 50, rate: 776.25, particulars: 'Machine Erection / Shifting Work / Manpower', nom: 14, qty: 14, amount: 10867.50},
 //     {sno: 50, rate: 1, particulars: 'Machine Erection / Shifting Work / Manpower', nom: 14, qty: 14, amount: 10867.50},
 // ]);
-const [rows, setRows] = useState([]);
+
   return (
     <Router>
       <div>
         {/* <CalcPage/> */}
         {/* <DynamicTable/> */}
         <Routes>
-          <Route path='/' element={<CalcPage setBillDetails={setBillDetails} setRows={setRows}/>}></Route>
+          <Route path='/' element={<CalcPage setBillDetails={setBillDetails} />}></Route>
           <Route path='/bill' element={<BillPage billDetails={billDetails} />}></Route>
         </Routes>
       </div>

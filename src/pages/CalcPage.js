@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import DynamicTable from "./DynamicTable";
 import { useSelector } from "react-redux";
 
-const CalcPage =({setBillDetails, setRows}) => {
+const CalcPage =({ setBillDetails }) => {
 
     const navigate = useNavigate();
     const totalAmount = useSelector(state => state.app.totalAmount);
