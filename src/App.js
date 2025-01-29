@@ -24,9 +24,11 @@ const [rows, setRows] = useState([]);
   return (
     <Router>
       <div>
+        {/* <CalcPage/> */}
+        {/* <DynamicTable/> */}
         <Routes>
           <Route path='/' element={<CalcPage setBillDetails={setBillDetails} setRows={setRows}/>}></Route>
-          <Route path='/bill' element={<BillPage billDetails={billDetails} rows={rows} />}></Route>
+          <Route path='/bill' element={<BillPage billDetails={billDetails} />}></Route>
         </Routes>
       </div>
     </Router>

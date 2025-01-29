@@ -1,54 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import DynamicTable from "./DynamicTable";
+import { useSelector } from "react-redux";
 
 const CalcPage =({setBillDetails, setRows}) => {
 
     const navigate = useNavigate();
+    const totalAmount = useSelector(state => state.app.totalAmount);
+    const gst = useSelector(state => state.app.gst);
+    const finalAmount = useSelector(state => state.app.finalAmount);
+    const amountInWords = useSelector(state => state.app.amountInWords);
 
-    const calculate = (event) => {
-        let targetId = event.target.id;
-        let index = targetId.slice(3);
-      
-        let qtyId = `qty${index}`;
-        let ratId = `rat${index}`;
-        let amoId = `amo${index}`;
-      
-        let qtyInput = document.getElementById(qtyId);
-        let ratInput = document.getElementById(ratId);
-        let amoInput = document.getElementById(amoId);
-      
-        // Extract the numeric part from the input values
-        let qtyValue = parseFloat(qtyInput.value) || 0; // Convert to float, default to 0 if not a valid number
-        let ratValue = parseFloat(ratInput.value) || 0;
-      
-        let amount = qtyValue * ratValue;
-      
-        // Update the amount field
-        amoInput.value = parseFloat(amount).toFixed(2);;
-        // calculateTA();
-      }
-
-      const capitalizeFirstLetter = (event) => {
-        const paragraph = event.target.value;
-        if (!paragraph || typeof paragraph !== "string") {
-            return "";
-        }
-    
-        // Split the paragraph into sentences using punctuation as delimiters.
-        const sentences = paragraph.split(/([.!?]\s*)/);
-    
-        // Capitalize the first letter of each sentence.
-        const capitalized = sentences
-            .map((sentence) =>
-                sentence.trim().length > 0
-                    ? sentence.charAt(0).toUpperCase() + sentence.slice(1)
-                    : sentence
-            )
-            .join("");
-    
-        return capitalized;
-    }
-
+    console.log("totalAmount: ", totalAmount);
 
     const updateInvoiceNo = (event) => {
         setBillDetails((prevBillDetails) => ({...prevBillDetails, invoiceNo: event.target.value}));
@@ -88,14 +51,6 @@ const CalcPage =({setBillDetails, setRows}) => {
         }
     };
 
-    const updateRow = (event) => {
-        console.log("Event: ", event, " Target: ", event.target, " Target ID: ", event.target.id.slice(3), " Target Value: ", event.target.value);
-        // switch (event.target.id.slice(3)){
-        //     case '1':
-        //         setRows((prevRows) => ([...prevRows, prevRows[0].rate = event.target.value]))
-        // }
-    }
-
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', width: '100%', backgroundColor: '#E3F2FD'}}>
         <div style={{fontSize: '26px', fontWeight: 'bold', margin: '10px'}}>
@@ -125,168 +80,30 @@ const CalcPage =({setBillDetails, setRows}) => {
             </tbody>
         </table>
         <br/>
-        <table style={{border: 'none' }}>
+        <DynamicTable />
+        <br/>
+        <table>
             <tbody>
                 <tr>
-                    <th>S.No.</th>
-                    <th>Rate(Rs.)</th>
-                    <th>Particulars</th>
-                    <th>No. Of Man</th>
-                    <th>Quantity</th>
-                    <th>Amount(Rs.)</th>
+                    <th>Total</th>
+                    <th>GST</th>
+                    <th>Total Amount</th>
                 </tr>
                 <tr>
-                    <td>
-                        <input id="sno1" className="inputSno" type="text"/>
-                    </td>
-                    <td>
-                        <input id="rat1" className="inputRat" type="text" onInput={calculate} onChange={updateRow} required=""/>
-                    </td>
-                    <td><textarea id="par1" className="inputPar" type="text" onInput={capitalizeFirstLetter} required=""></textarea></td>
-                    <td><input id="nom1" className="inputNOM" type="text"/></td>
-                    <td>
-                        <input id="qty1" className="inputQty" type="text" onInput={calculate} required=""/>
-                    </td>
-                    <td><input id="amo1" className="inputAmo" type="text" disabled/></td>
+                    <td><input id="total" type="text" value={totalAmount} disabled/></td>
+                    <td><input id="cgst" type="text" value={gst} disabled /></td>
+                    <td><input id="totalAmount" type="text" value={finalAmount} disabled /></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td><b>Amount (in words):</b></td>
                 </tr>
                 <tr>
-                    <td>
-                        <input id="sno2" className="inputSno" type="text"/>
-                    </td>
-                    <td>
-                        <input id="rat2" className="inputRat" type="text" onInput={calculate}/>
-                    </td>
-                    <td><textarea id="par2" className="inputPar" type="text" onInput={capitalizeFirstLetter}></textarea></td>
-                    <td><input id="nom2" className="inputNOM" type="text"/></td>
-                    <td>
-                        <input id="qty2" className="inputQty" type="text" onInput={calculate}/>
-                    </td>
-                    <td><input id="amo2" className="inputAmo" type="text" disabled/></td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <input id="sno3" className="inputSno" type="text"/>
-                    </td>
-                    <td>
-                        <input id="rat3" className="inputRat" type="text" onInput={calculate}/>
-                    </td>
-                    <td><textarea id="par3" className="inputPar" type="text" onInput={capitalizeFirstLetter}></textarea></td>
-                    <td><input id="nom3" className="inputNOM" type="text"/></td>
-                    <td>
-                        <input id="qty3" className="inputQty" type="text" onInput={calculate}/>
-                    </td>
-                    <td><input id="amo3" className="inputAmo" type="text" disabled/></td>
-                </tr>
-                <tr>
-                    <td>
-                        <input id="sno4" className="inputSno" type="text"/>
-                    </td>
-                    <td>
-                        <input id="rat4" className="inputRat" type="text" onInput={calculate}/>
-                    </td>
-                    <td><textarea id="par4" className="inputPar" type="text" onInput={capitalizeFirstLetter}></textarea></td>
-                    <td><input id="nom4" className="inputNOM" type="text"/></td>
-                    <td>
-                        <input id="qty4" className="inputQty" type="text" onInput={calculate}/>
-                    </td>
-                    <td><input id="amo4" className="inputAmo" type="text" disabled/></td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <input id="sno5" className="inputSno" type="text"/>
-                    </td>
-                    <td>
-                        <input id="rat5" className="inputRat" type="text" onInput={calculate}/>
-                    </td>
-                    <td><textarea id="par5" className="inputPar" type="text" onInput={capitalizeFirstLetter}></textarea></td>
-                    <td><input id="nom5" className="inputNOM" type="text"/></td>
-                    <td>
-                        <input id="qty5" className="inputQty" type="text" onInput={calculate}/>
-                    </td>
-                    <td><input id="amo5" className="inputAmo" type="text" disabled/></td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <input id="sno6" className="inputSno" type="text"/>
-                    </td>
-                    <td>
-                        <input id="rat6" className="inputRat" type="text" onInput={calculate}/>
-                    </td>
-                    <td><textarea id="par6" className="inputPar" type="text" onInput={capitalizeFirstLetter}></textarea></td>
-                    <td><input id="nom6" className="inputNOM" type="text"/></td>
-                    <td>
-                        <input id="qty6" className="inputQty" type="text" onInput={calculate}/>
-                    </td>
-                    <td><input id="amo6" className="inputAmo" type="text" disabled/></td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <input id="sno7" className="inputSno" type="text"/>
-                    </td>
-                    <td>
-                        <input id="rat7" className="inputRat" type="text" onInput={calculate}/>
-                    </td>
-                    <td><textarea id="par7" className="inputPar" type="text" onInput={capitalizeFirstLetter}></textarea></td>
-                    <td><input id="nom7" className="inputNOM" type="text"/></td>
-                    <td>
-                        <input id="qty7" className="inputQty" type="text" onInput={calculate}/>
-                    </td>
-                    <td><input id="amo7" className="inputAmo" type="text" disabled/></td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <input id="sno8" className="inputSno" type="text"/>
-                    </td>
-                    <td>
-                        <input id="rat8" className="inputRat" type="text" onInput={calculate}/>
-                    </td>
-                    <td><textarea id="par8" className="inputPar" type="text" onInput={capitalizeFirstLetter}></textarea></td>
-                    <td><input id="nom8" className="inputNOM" type="text"/></td>
-                    <td>
-                        <input id="qty8" className="inputQty" type="text" onInput={calculate}/>
-                    </td>
-                    <td><input id="amo8" className="inputAmo" type="text" disabled/></td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <input id="sno9" className="inputSno" type="text"/>
-                    </td>
-                    <td>
-                        <input id="rat9" className="inputRat" type="text" onInput={calculate}/>
-                    </td>
-                    <td><textarea id="par9" className="inputPar" type="text" onInput={capitalizeFirstLetter}></textarea></td>
-                    <td><input id="nom9" className="inputNOM" type="text"/></td>
-                    <td>
-                        <input id="qty9" className="inputQty" type="text" onInput={calculate}/>
-                    </td>
-                    <td><input id="amo9" className="inputAmo" type="text" disabled/></td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <input id="sno10" className="inputSno" type="text"/>
-                    </td>
-                    <td>
-                        <input id="rat10" className="inputRat" type="text" onInput={calculate}/>
-                    </td>
-                    <td><textarea id="par10" className="inputPar" type="text" onInput={capitalizeFirstLetter}></textarea></td>
-                    <td><input id="nom10" className="inputNOM" type="text"/></td>
-                    <td>
-                        <input id="qty10" className="inputQty" type="text" onInput={calculate}/>
-                    </td>
-                    <td>
-                        <input id="amo10" className="inputAmo" type="text" disabled/>
-                    </td>
+                    <td colSpan={4}><input style={{width: '450px'}} id="amountInWords" type="text" value={amountInWords} disabled /></td>
                 </tr>
             </tbody>
-        </table>
-        <br/>
+          </table>
+          <br/>
         <div>
             <button style={{padding: '10px 20px', margin: '10px', cursor: 'pointer', border: '2px solid #c62828', borderRadius: '4px', backgroundColor: '#f44336', color: '#fff', fontSize: '16px'}} type="reset">RESET</button>
             <button onClick={() => navigate('/bill')} style={{padding: '10px 20px', margin: '10px', cursor: 'pointer', border: '2px solid #2e7d3f', borderRadius: '4px', backgroundColor: '#4caf50', color: '#fff', fontSize: '16px'}} type="submit">SUBMIT</button>
