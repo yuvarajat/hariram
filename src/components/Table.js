@@ -2,8 +2,9 @@ import React from "react";
 import styles from './Table.module.css';
 import { useSelector } from "react-redux";
 
-const Table = ({billDetails}) => {
-    
+const Table = () => {
+
+    const billDetails = useSelector(state => state.app.billDetails);
     const formData = useSelector(state => state.app.formData);
     const total = useSelector(state => state.app.totalAmount);
     const gst = useSelector(state => state.app.gst);

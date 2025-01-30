@@ -1,10 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import DynamicTable from "./DynamicTable";
-import { useSelector } from "react-redux";
+import { setInvoiceNo, setInvoiceDate, setInvoicePONo, setExtractedMonthYear } from '../redux/appSlice';
+import { useDispatch, useSelector } from "react-redux";
 
-const CalcPage =({ setBillDetails }) => {
+const CalcPage =() => {
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const totalAmount = useSelector(state => state.app.totalAmount);
     const gst = useSelector(state => state.app.gst);
@@ -14,11 +16,11 @@ const CalcPage =({ setBillDetails }) => {
     console.log("totalAmount: ", totalAmount);
 
     const updateInvoiceNo = (event) => {
-        setBillDetails((prevBillDetails) => ({...prevBillDetails, invoiceNo: event.target.value}));
+        dispatch(setInvoiceNo(event.target.value));
     }
 
     const updateInvoicePONo = (event) => {
-        setBillDetails((prevBillDetails) => ({...prevBillDetails, invoicePONo: event.target.value}));
+        dispatch(setInvoicePONo(event.target.value));
     }
 
     const extractMonthYear = (event) => {
@@ -46,13 +48,15 @@ const CalcPage =({ setBillDetails }) => {
             // Get the year
             const year = dateObj.getFullYear();
 
+            const conDateF = convertDateFormat(dateValue);
             // Combine them into the desired format
-            setBillDetails((prevBillDetails) => ({...prevBillDetails, invoiceDate: convertDateFormat(dateValue), extractedMonthYear: `${month} ${year}`}));
+            dispatch(setInvoiceDate(conDateF));
+            dispatch(setExtractedMonthYear(`${month} ${year}`));
         }
     };
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', width: '100%', backgroundColor: '#E3F2FD'}}>
+    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100dvh', width: '100%', backgroundColor: '#E3F2FD'}}>
         <div style={{fontSize: '26px', fontWeight: 'bold', margin: '10px'}}>
             Hariram's Invoice Generator
         </div>

@@ -9,6 +9,28 @@
     /* background-color: #fff; */
   }
 
+  .print-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
+
+  button {
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  button[type="button"] {
+    background-color: #4caf50;
+    border-color: #2e7d3f;
+  }
+
   .inputSno, .inputRat, .inputPar, .inputNOM, .inputQty, .inputAmo {
     height: 50px;
   }
@@ -36,6 +58,10 @@
   .inputAmo {
     width: 90px;
   }
+
+  @page {
+    size: A4;
+  }
   
   /* Optional: You can add styles to ensure printing is A4-sized */
   @media print {
@@ -46,6 +72,12 @@
       /* padding: 0; */
       border: none;
       box-sizing: content-box;
+    }
+    
+    .print-button {
+      display: none;
+      height: 0px;
+      width: 0px;
     }
   }
   

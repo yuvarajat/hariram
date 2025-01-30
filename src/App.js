@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'; // Import the CSS file for styling
 
@@ -6,12 +6,6 @@ import CalcPage from './pages/CalcPage';
 import BillPage from './pages/BillPage';
 
 function App() {
-  const [billDetails, setBillDetails] = useState({
-    invoiceNo: '',
-    invoiceDate: '',
-    invoicePONo: '',
-    extractedMonthYear: 'JANUARY 2025',
-  });
 //   const [rows, setRows] = useState([
 //     {sno: 10, rate: 1.26, particulars: 'Top arm pressure checking', nom: 27.5, qty: 12688, amount: 15986.88},
 //     {sno: 20, rate: 3.21, particulars: 'Spindle resetting work', nom: 47, qty: 12688, amount: 40728.48},
@@ -27,8 +21,8 @@ function App() {
         {/* <CalcPage/> */}
         {/* <DynamicTable/> */}
         <Routes>
-          <Route path='/' element={<CalcPage setBillDetails={setBillDetails} />}></Route>
-          <Route path='/bill' element={<BillPage billDetails={billDetails} />}></Route>
+          <Route path='/' element={<CalcPage />}></Route>
+          <Route path='/bill' element={<BillPage />}></Route>
         </Routes>
       </div>
     </Router>

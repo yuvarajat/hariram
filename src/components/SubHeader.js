@@ -1,6 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-const SubHeader = ({billDetails}) => {
+const SubHeader = () => {
+
+    const billDetails = useSelector(state => state.app.billDetails);
 
     return(
         <div style={{display: 'flex', justifyContent: 'space-between', fontWeight: 'bold'}}>

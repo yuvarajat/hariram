@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    billDetails: {
+        invoiceNo: '',
+        invoiceDate: '',
+        invoicePONo: '',
+        extractedMonthYear: '',
+      },
     formData: {},
     totalAmount: 0,
     gst: 0,
@@ -14,6 +20,18 @@ const appSlice = createSlice({
     reducers: {
         increment: (state, action) => {
             state.count++;
+        },
+        setInvoiceNo: (state, action) => {
+            state.invoiceNo = action.payload;
+        },
+        setInvoiceDate: (state, action) => {
+            state.billDetails.invoiceDate = action.payload;
+        },
+        setInvoicePONo: (state, action) => {
+            state.billDetails.invoicePONo = action.payload;
+        },
+        setExtractedMonthYear: (state, action) => {
+            state.billDetails.extractedMonthYear = action.payload;
         },
         // setFormData: (state, action) => {
         //     state.formData = action.payload;
@@ -37,5 +55,5 @@ const appSlice = createSlice({
     }
 });
 
-export const { setFormData, setTotalAmount, setGST, setFinalAmount, setAmountInWords } = appSlice.actions;
+export const { setInvoiceNo, setInvoiceDate, setInvoicePONo, setExtractedMonthYear, setFormData, setTotalAmount, setGST, setFinalAmount, setAmountInWords } = appSlice.actions;
 export default appSlice.reducer; 
