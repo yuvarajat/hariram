@@ -56,7 +56,7 @@ const CalcPage =() => {
     };
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100dvh', width: '100%', backgroundColor: '#E3F2FD'}}>
+    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%', backgroundColor: '#E3F2FD'}}>
         <div style={{fontSize: '26px', fontWeight: 'bold', margin: '10px'}}>
             Hariram's Invoice Generator
         </div>
