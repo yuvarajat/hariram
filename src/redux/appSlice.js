@@ -22,7 +22,7 @@ const appSlice = createSlice({
             state.count++;
         },
         setInvoiceNo: (state, action) => {
-            state.invoiceNo = action.payload;
+            state.billDetails.invoiceNo = action.payload;
         },
         setInvoiceDate: (state, action) => {
             state.billDetails.invoiceDate = action.payload;
