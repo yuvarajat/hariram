@@ -56,6 +56,18 @@ const CalcPage =() => {
         }
     };
 
+const convertToDateInputFormat = (dateStr) => {
+    const [day, month, year] = dateStr.split('-');
+    return `${year}-${month}-${day}`;
+};
+
+// Example usage:
+console.log(convertToDateInputFormat("14-02-2025")); // Output: "2025-02-14"
+
+// Example usage:
+const formattedDate = convertToDateInputFormat("14-02-2025");
+console.log(formattedDate); // Output: "2025-02-14"
+
   return (
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%', backgroundColor: '#E3F2FD'}}>
         <div style={{fontSize: '26px', fontWeight: 'bold', margin: '10px'}}>
@@ -71,7 +83,7 @@ const CalcPage =() => {
                 <tr>
                     <td style={{fontWeight: 'bold'}}>Invoice Date: </td>
                     <td>
-                        <input id="invoiceDate" type="date" onChange={extractMonthYear} value={billDetails.invoiceDate} required="" />
+                        <input id="invoiceDate" type="date" onChange={extractMonthYear} value={convertToDateInputFormat(billDetails.invoiceDate)} required="" />
                     </td>
                 </tr>
                 <tr>
