@@ -8,6 +8,7 @@ const CalcPage =() => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const billDetails = useSelector(state => state.app.billDetails);
     const totalAmount = useSelector(state => state.app.totalAmount);
     const gst = useSelector(state => state.app.gst);
     const finalAmount = useSelector(state => state.app.finalAmount);
@@ -65,18 +66,18 @@ const CalcPage =() => {
             <tbody>
                 <tr>
                     <td style={{fontWeight: 'bold'}}>Invoice No: </td>
-                    <td><input id="invoiceNo" type="text" onChange={updateInvoiceNo} required="" /></td>
+                    <td><input id="invoiceNo" type="text" onChange={updateInvoiceNo} value={billDetails.invoiceNo} required="" /></td>
                 </tr>
                 <tr>
                     <td style={{fontWeight: 'bold'}}>Invoice Date: </td>
                     <td>
-                        <input id="invoiceDate" type="date" onChange={extractMonthYear} required="" />
+                        <input id="invoiceDate" type="date" onChange={extractMonthYear} value={billDetails.invoiceDate} required="" />
                     </td>
                 </tr>
                 <tr>
                     <td style={{fontWeight: 'bold'}}>P.O.No: </td>
                     <td>
-                        <input id="PONo" type="text" onChange={updateInvoicePONo} required="" />
+                        <input id="PONo" type="text" onChange={updateInvoicePONo} value={billDetails.invoicePONo} required="" />
                     </td>
                 </tr>
                 <tr>
