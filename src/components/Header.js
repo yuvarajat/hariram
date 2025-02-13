@@ -16,7 +16,7 @@ const Header = () => {
                 <div>Account No: 1008201010612</div>
                 <div>IFSC Code: CNRB0001008</div>
                 <div>PAN Number: ACWPH9219A</div>
-                <div>GST Number: 33ACWPH9219A12M</div>
+                <div>GST Number: 33ACWPH9219A1ZM</div>
             </div>
         </div>
 
